@@ -1,0 +1,50 @@
+title = "t7o.com"
+description = "Personal blog about personal projects, especially open-source work."
+base_url = "https://t7o.com"
+default_language = "en"
+
+theme = "austere"
+
+compile_sass = true
+
+build_search_index = true
+generate_feeds = true
+feed_filenames = ["atom.xml", "rss.xml"]
+
+taxonomies = [{ name = "tags", feed = true }]
+
+[search]
+index_format = "fuse_javascript"
+
+[markdown.highlighting]
+style = "class"
+theme = "catppuccin-mocha"
+
+[slugify]
+paths = "on"
+taxonomies = "on"
+anchors = "on"
+
+[extra]
+keywords = "zola, personal, blog, open-source"
+umami_website_id = "2d058d09-f726-48b8-a35e-2c628fa0bfd7"
+site_icon = "quill.svg"
+strapline = "Bohdan's notes"
+footer_text = "t7o.com"
+favicon = "/favicon.ico"
+profile_picture = "/images/profile.svg"
+
+# Inline SVG sprite sheet requires icon files inside the project tree,
+# which doesn't work when the theme is a symlink into the Nix store.
+# Fall back to <img src=/icons/…svg> served from merged static dirs.
+inline_icons = false
+icons = ["light", "asleep", "rss"]
+
+image_format = "auto"
+image_quality = 80
+images_default_size = 1024
+images_sizes = [512, 1024, 2048]
+
+menu_links = []
+
+# Colours are hardcoded in sass/style.scss; edit the SCSS variables there.

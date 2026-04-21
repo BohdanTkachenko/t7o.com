@@ -1,0 +1,4 @@
+.nix-profile
+.direnv
+public/
+themes/austere

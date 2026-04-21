@@ -1,0 +1,118 @@
+{% import "macros/head.html" as head -%}
+{% import "macros/opengraph.html" as social -%}
+{% import "macros/hooks.html" as hooks -%}
+{% import "macros/images.html" as images -%}
+{% import "macros/icons.html" as icons -%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {%- block general_meta -%}{{ head::general_meta() }}{%- endblock general_meta -%}
+    {%- block og_preview -%}{{ social::og_preview() }}{%- endblock og_preview -%}
+
+    {% block rss -%}
+    <link rel="alternate" type="application/atom+xml"
+          title="{{ config.title }}"
+          href="{{ get_url(path='atom.xml', trailing_slash=false) | safe }}">
+    {% endblock rss -%}
+
+    {% if config.extra.favicon %}
+    <link rel="icon" href="{{ config.extra.favicon }}">
+    {% endif %}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style"
+          href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+    <link rel="stylesheet" media="print" onload="this.media='all'"
+          href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+    <noscript>
+        <link rel="stylesheet"
+              href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+    </noscript>
+
+    <link rel="stylesheet" href="{{ get_url(path='style.css', trailing_slash=false) | safe }}">
+    <meta name="theme-color" id="tc">
+    <script src="{{ get_url(path='js/theme.js', trailing_slash=false) | safe }}"></script>
+
+    {% block head_extra %}{% endblock head_extra %}
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    {% if config.extra.inline_icons %}{{ icons::sprite() }}{% endif %}
+
+    <header>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+            <span class="header-brand">
+                {% if config.extra.site_icon is defined %}
+                    {% if config.extra.site_icon == "" or config.extra.site_icon == "quill.svg" %}
+                        <span class="site-icon" aria-hidden="true"></span>
+                    {% else %}
+                        <img src="{{ config.extra.site_icon }}" class="custom-icon" alt="">
+                    {% endif %}
+                {% endif %}
+                <a href="{{ config.base_url | safe }}"><strong>{{ config.title }}</strong></a>
+                {% if config.extra.strapline %}
+                    <span class="desc"> · {{ config.extra.strapline }}</span>
+                {% endif %}
+            </span>
+            <a href="#" onclick="T();return false" class="theme" aria-label="Toggle theme" title="Toggle theme">
+                {% if config.extra.inline_icons %}
+                    {{ icons::icon(name="light.svg") }}{{ icons::icon(name="asleep.svg") }}
+                {% else %}
+                    <img src="/icons/light.svg" alt="Light mode">
+                    <img src="/icons/asleep.svg" alt="Dark mode">
+                {% endif %}
+            </a>
+        </div>
+
+        {% set nav_count = config.extra.menu_links | length -%}
+        {% if nav_count > 0 -%}
+            <hr>
+            <nav>
+                {% for menu_link in config.extra.menu_links -%}
+                    {% set link_url = menu_link.url | replace(from="$BASE_URL", to=config.base_url) -%}
+                    {% set current_url_slash = current_url ~ "/" -%}
+                    {% set base_url_slash = config.base_url ~ "/" -%}
+                    {% set is_home = link_url == config.base_url or link_url == base_url_slash -%}
+                    {% set is_active = current_url == link_url or current_url_slash == link_url or (not is_home and current_url is starting_with(link_url)) -%}
+                    {% if current_url and is_active -%}
+                        <a href="{{ link_url | safe }}" class="active">{{ menu_link.name }}</a>
+                    {% else -%}
+                        <a href="{{ link_url | safe }}">{{ menu_link.name }}</a>
+                    {% endif -%}
+                {% endfor -%}
+            </nav>
+        {%- endif %}
+    </header>
+
+    <hr>
+    <main id="main">
+        {% block content -%}{% endblock -%}
+    </main>
+    <hr>
+
+    <footer class="s">
+        {% if config.extra.footer_text %}
+            <span>{{ config.extra.footer_text | safe }}</span>
+        {% endif %}
+        {% if config.generate_feeds %}
+            <span>Feeds:
+                <a href="{{ get_url(path='atom.xml', trailing_slash=false) | safe }}">Atom</a> ·
+                <a href="{{ get_url(path='rss.xml',  trailing_slash=false) | safe }}">RSS</a>
+            </span>
+        {% endif %}
+    </footer>
+
+    {% block body_end -%}
+        {# Analytics: Umami #}
+        {% if config.extra.umami_website_id -%}
+            <script defer
+                    src="{{ config.extra.umami_src | default(value='https://cloud.umami.is/script.js') | safe }}"
+                    data-website-id="{{ config.extra.umami_website_id }}"
+                    {% if config.extra.umami_domains %}data-domains="{{ config.extra.umami_domains }}"{% endif %}></script>
+        {% endif -%}
+
+        <script defer src="{{ get_url(path='js/lightbox.js', trailing_slash=false) | safe }}"></script>
+    {% endblock body_end -%}
+</body>
+</html>

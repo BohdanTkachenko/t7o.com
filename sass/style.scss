@@ -1,0 +1,581 @@
+// Material Lighter (light) + Material Oceanic (dark).
+
+$light-bg: #fafafa;
+$light-text: #263238;
+$light-text-muted: #546e7a;
+$light-accent: #6182b8;
+$light-accent-hover: #39adb5;
+$light-code-bg: #eceff1;
+$light-border: #cfd8dc;
+
+$dark-bg: #263238;
+$dark-text: #eeffff;
+$dark-text-muted: #8f93a2;
+$dark-accent: #82aaff;
+$dark-accent-hover: #89ddff;
+$dark-code-bg: #1e272c;
+$dark-border: #37474f;
+
+// --- Layout / typography (palette-independent) ---
+
+html {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: auto;
+  max-width: 70ch;
+  padding: 1.5rem 1em 3em;
+}
+
+img {
+  max-width: 100%;
+
+  &:not([src$=".svg"]) {
+    border-radius: 0.4rem;
+  }
+
+  &[src$="#pixelate"] {
+    image-rendering: pixelated;
+  }
+}
+
+article > div,
+blockquote,
+pre {
+  border-radius: 0.4rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 1.5rem 0 0.75rem;
+}
+
+h1 {
+  font-size: 1.75rem;
+}
+h2 {
+  font-size: 1.375rem;
+}
+h3 {
+  font-size: 1.125rem;
+}
+
+p {
+  text-align: justify;
+}
+
+p,
+ul,
+ol,
+article > footer,
+article > header {
+  margin: 0 0 1.5rem;
+}
+
+pre,
+blockquote {
+  padding: 1.5rem;
+  margin: 0 0 1.5rem;
+}
+
+pre {
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.5;
+
+  code {
+    background: 0 !important;
+    padding: 0;
+    font-size: inherit;
+  }
+}
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.9em;
+  padding: 0.15em 0.4em;
+  border-radius: 0.25rem;
+}
+
+blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: 1.25rem;
+  font-style: italic;
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+article > img,
+article > p > img,
+article > div {
+  display: block;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.yt {
+  aspect-ratio: 16/9;
+  width: 100%;
+  overflow: hidden;
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+}
+
+.s {
+  font-size: 0.85rem;
+}
+
+// Theme toggle icon visibility.
+.theme {
+  display: inline-block;
+  width: 1.125rem;
+  height: 1.125rem;
+  vertical-align: middle;
+  margin-bottom: 0.15rem;
+
+  img,
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+html.light .theme img:first-child,
+html.light .theme svg:first-child,
+html.dark .theme img:last-child,
+html.dark .theme svg:last-child {
+  display: none;
+}
+
+header {
+  strong {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-weight: 600;
+    color: var(--accent);
+  }
+}
+
+.site-icon {
+  display: inline-block;
+  width: 2.25rem;
+  height: 2.25rem;
+  vertical-align: middle;
+  margin-right: 1rem;
+  background: var(--accent);
+  -webkit-mask: url("/icons/site.svg") center/contain no-repeat;
+  mask: url("/icons/site.svg") center/contain no-repeat;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+}
+
+.custom-icon {
+  height: auto;
+  max-height: 3rem;
+  width: auto;
+  margin-right: 1rem;
+}
+
+body > footer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+
+  img,
+  svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.125em;
+  }
+}
+
+.tags {
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+
+  li {
+    display: inline;
+  }
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  margin-bottom: 1.5rem;
+
+  a {
+    font-weight: 500;
+  }
+
+  img,
+  svg {
+    display: none;
+  }
+}
+
+.p {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+
+  li {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 0.75rem;
+    align-items: baseline;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  time {
+    opacity: 0.7;
+    flex-shrink: 0;
+  }
+}
+
+.profile-pic {
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 1.5rem;
+}
+
+.projects .project {
+  margin-bottom: 1.5rem;
+
+  header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+
+    h2 {
+      margin: 0;
+      font-size: 1.375rem;
+    }
+  }
+
+  p {
+    margin-bottom: 0.75rem;
+  }
+
+  .tags {
+    margin: 0;
+  }
+}
+
+.project-emoji {
+  font-size: 1.5rem;
+}
+
+.project-image {
+  max-width: 200px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  float: right;
+  margin: 0 0 1.5rem 1.5rem;
+  border-radius: 0.4rem;
+}
+
+.lb {
+  position: fixed;
+  inset: 0;
+  background: #000d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  cursor: pointer;
+
+  img {
+    max-width: 95vw;
+    max-height: 95vh;
+  }
+}
+
+@media (max-width: 30em) {
+  header .desc {
+    display: none;
+  }
+}
+
+// --- Shared palette-aware rules ---
+
+a.active {
+  color: var(--accent);
+}
+
+a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid;
+  clear: both;
+  margin: 1.5rem 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  padding: 0.5rem 1rem;
+  background: var(--accent);
+  color: #fff;
+  z-index: 1000;
+
+  &:focus {
+    top: 0;
+  }
+}
+
+// --- Light theme ---
+
+html.light {
+  background: $light-bg;
+  --tc: #{$light-bg};
+  --accent: #{$light-accent};
+  --accent-hover: #{$light-accent-hover};
+  color: $light-text;
+
+  a {
+    color: var(--accent);
+    text-decoration: underline;
+
+    &:visited {
+      color: var(--accent);
+    }
+
+    &:hover {
+      color: var(--accent-hover);
+    }
+  }
+
+  header > div > span > a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  p,
+  ul,
+  ol,
+  .desc {
+    color: $light-text-muted;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: $light-text;
+  }
+
+  strong {
+    color: $light-text;
+  }
+
+  header strong {
+    color: var(--accent);
+  }
+
+  blockquote {
+    border-left: 3px solid var(--accent);
+    color: #555;
+  }
+
+  pre,
+  article > img,
+  article > p > img {
+    background: $light-code-bg;
+  }
+
+  code {
+    background: $light-code-bg;
+    color: $light-text;
+  }
+
+  hr {
+    border-color: $light-border;
+  }
+
+  // Syntax highlighting (GitHub Light-ish).
+  .z-comment {
+    color: #6a737d;
+    font-style: italic;
+  }
+  .z-keyword,
+  .z-operator {
+    color: #d73a49;
+  }
+  .z-string,
+  .z-tag {
+    color: #22863a;
+  }
+  .z-number,
+  .z-type,
+  .z-constant,
+  .z-label {
+    color: #005cc5;
+  }
+  .z-function,
+  .z-attribute,
+  .z-builtin {
+    color: #6f42c1;
+  }
+  .z-variable,
+  .z-namespace {
+    color: #e36209;
+  }
+  .z-punctuation {
+    color: #24292e;
+  }
+}
+
+// --- Dark theme ---
+
+html.dark {
+  background: $dark-bg;
+  --tc: #{$dark-bg};
+  --accent: #{$dark-accent};
+  --accent-hover: #{$dark-accent-hover};
+  color: $dark-text;
+
+  a {
+    color: var(--accent);
+    text-decoration: underline;
+
+    &:visited {
+      color: var(--accent);
+    }
+
+    &:hover {
+      color: var(--accent-hover);
+    }
+  }
+
+  header > div > span > a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  p,
+  ul,
+  ol,
+  .desc {
+    color: $dark-text-muted;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #fff;
+  }
+
+  strong {
+    color: #fff;
+  }
+
+  header strong {
+    color: var(--accent);
+  }
+
+  blockquote {
+    border-left: 3px solid var(--accent);
+    color: $dark-text-muted;
+  }
+
+  img[src$=".svg"],
+  nav svg,
+  .theme svg,
+  footer svg {
+    filter: invert(1);
+  }
+
+  pre,
+  article > img,
+  article > p > img {
+    background: $dark-code-bg;
+  }
+
+  code {
+    background: $dark-code-bg;
+    color: $dark-text;
+  }
+
+  hr {
+    border-color: $dark-border;
+  }
+
+  // Syntax highlighting (GitHub Dark-ish).
+  .z-comment {
+    color: #8b949e;
+    font-style: italic;
+  }
+  .z-keyword,
+  .z-operator {
+    color: #ff7b72;
+  }
+  .z-string {
+    color: #a5d6ff;
+  }
+  .z-number,
+  .z-type,
+  .z-constant,
+  .z-label {
+    color: #79c0ff;
+  }
+  .z-function,
+  .z-attribute,
+  .z-builtin {
+    color: #d2a8ff;
+  }
+  .z-tag {
+    color: #7ee787;
+  }
+  .z-variable,
+  .z-namespace {
+    color: #ffa657;
+  }
+  .z-punctuation {
+    color: #c9d1d9;
+  }
+}
