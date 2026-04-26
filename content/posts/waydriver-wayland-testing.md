@@ -104,6 +104,6 @@ Open-source desktops have always had passion behind them and rarely enough hands
 - crates.io: [`waydriver`](https://crates.io/crates/waydriver)
 - Docker/Podman: `bohdantkachenko/waydriver-mcp:latest`
   
-License is Apache 2-0.
+License is Apache-2.0.
 
 What would help most right now is people actually using it on real projects — finding the rough edges, filing issues, telling me what's missing. KWin and sway backends are doable from the existing trait surface; if there's interest, they'll happen.
