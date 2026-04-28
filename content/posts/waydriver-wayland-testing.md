@@ -44,6 +44,13 @@ AT-SPI exposes every widget as a node with a role and properties, so XPath picks
 
 Each session produces a self-contained `index.html` viewer with the WebM recording embedded and an event log, so when a test fails in CI you have something to look at.
 
+<figure>
+  <video controls autoplay muted loop playsinline preload="metadata" src="/videos/waydriver-demo-gnome-calculator.webm" aria-describedby="demo-caption">
+    Your browser does not support embedded video. The clip shows a WayDriver test session driving GNOME Calculator: typing <code>2 + 3</code>, pressing equals, and observing the result <code>5</code>.
+  </video>
+  <figcaption id="demo-caption">A WayDriver session recording: GNOME Calculator is launched inside the headless Mutter bubble, then driven through AT-SPI to compute <code>2 + 3 = 5</code>.</figcaption>
+</figure>
+
 ## The architecture
 
 ```

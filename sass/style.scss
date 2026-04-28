@@ -116,10 +116,26 @@ blockquote {
 
 article > img,
 article > p > img,
+article > video,
+article > p > video,
+article > figure,
+article > figure > video,
+article > figure > img,
 article > div {
   display: block;
   margin-bottom: 1.5rem;
   width: 100%;
+}
+
+article > figure {
+  margin: 0 0 1.5rem;
+
+  figcaption {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 0.5rem;
+    text-align: center;
+  }
 }
 
 .yt {
